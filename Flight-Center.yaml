@@ -1,0 +1,97 @@
+---
+swagger: "2.0"
+info:
+  title: Flight Center
+  version: "1.0"
+host: flight-status-flightcenter.apps.summithack-d65b.openshiftworkshop.com
+schemes:
+- http
+paths:
+  /flight/status/{flightno}:
+    get:
+      summary: Query flight status
+      description: Query flight status
+      operationId: flightstatus
+      produces:
+      - application/json
+      parameters:
+      - name: flightno
+        in: path
+        description: Flight Number
+        required: true
+        type: string
+      responses:
+        200:
+          description: Returned flight status
+          schema:
+            $ref: '#/definitions/Flight'
+  /flight/rebook/{flightno}/{speakername}/{userid}:
+    post:
+      summary: Rebooking flight with old flight number
+      description: Rebooking flight with old flight number
+      operationId: rebook
+      responses:
+        200:
+          description: Rebook Done
+          schema:
+            $ref: '#/definitions/MyFlight'
+    parameters:
+    - name: flightno
+      in: path
+      description: |
+        Flight Number to rebook
+      required: true
+      type: string
+    - name: speakername
+      in: path
+      description: Speaker Name to rebook
+      required: true
+      type: string
+    - name: userid
+      in: path
+      description: Your assigned User ID
+      required: true
+      type: string
+definitions:
+  Flight:
+    title: Root Type for Flight
+    description: The root of the Flight type's schema.
+    type: object
+    properties:
+      flightno:
+        type: string
+      arrivaltime:
+        type: string
+      delayed:
+        type: boolean
+    example: |-
+      {
+          "flightno": "DL3929",
+          "arrivaltime": "9:45 AM",
+          "delayed": true
+      }
+  MyFlight:
+    title: Root Type for MyFlight
+    description: The root of the MyFlight type's schema.
+    type: object
+    properties:
+      flight:
+        type: object
+        properties:
+          flightno:
+            type: string
+          status:
+            type: string
+          arrivaltime:
+            type: string
+      speakerName:
+        type: string
+    example: |-
+      {
+          "flight": {
+              "flightno": "CA946",
+              "status": "On-Time",
+              "arrivaltime": "18:24"
+          },
+          "speakerName": "Rikki Lytch"
+      }
