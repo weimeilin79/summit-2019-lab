@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   title: Flight Center
   version: "1.0"
-host: flight-status-flightcenter.apps.summithack-d65b.openshiftworkshop.com
+host: flight-status-flightcenter.apps.summit-3a08.openshiftworkshop.com
 schemes:
 - http
 paths:
@@ -62,13 +62,13 @@ definitions:
         type: string
       arrivaltime:
         type: string
-      delayed:
-        type: boolean
+      status:
+        type: string
     example: |-
       {
           "flightno": "DL3929",
           "arrivaltime": "9:45 AM",
-          "delayed": true
+          "status": "On-Time"
       }
   MyFlight:
     title: Root Type for MyFlight
